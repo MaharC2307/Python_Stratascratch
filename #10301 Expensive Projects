@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+ms_projects = ms_projects.rename(columns = {'id':'proj_id'})
+df = ms_projects.merge(ms_emp_projects,left_on = 'proj_id',right_on = 'project_id' )
+df['emp_count'] = df.groupby('title')['emp_id'].transform('count')
+df['proj_budget_alloc'] = round(df['budget']/df['emp_count'])
+df[['title','proj_budget_alloc']].drop_duplicates().sort_values(by = 'proj_budget_alloc' , ascending= False)
