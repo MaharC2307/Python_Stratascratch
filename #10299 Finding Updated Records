@@ -1,0 +1,8 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+ms_employee_salary['current_salary'] = ms_employee_salary.groupby('id')['salary'].transform('max')
+ms_employee_salary = ms_employee_salary[ms_employee_salary['salary'] == ms_employee_salary['current_salary']]
+ms_employee_salary
+ms_employee_salary[['id','first_name','last_name','department_id','current_salary']].sort_values(by = 'id')
