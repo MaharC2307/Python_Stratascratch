@@ -1,0 +1,14 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = ms_user_dimension.merge(ms_acc_dimension, on ='acc_id')
+df = df.merge(ms_download_facts, on = 'user_id').replace({'no' : 'non-paying-cust','yes' : 'paying-cust'})
+df_pay_cust = df[df['paying_customer'] == 'paying-cust'].groupby('date')['downloads'].sum().reset_index()
+df_pay_cust
+
+df_non_pay_cust = df[df['paying_customer'] == 'non-paying-cust'].groupby('date')['downloads'].sum().reset_index()
+df_non_pay_cust
+
+df_final = df_pay_cust.merge(df_non_pay_cust,on = 'date', how = 'outer',suffixes = ('_pay_downloads','_non_pay_downloads'))
+df_final[df_final['downloads_non_pay_downloads'] > df_final['downloads_pay_downloads']].sort_values(by = 'date', ascending = True)
