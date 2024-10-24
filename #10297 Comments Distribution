@@ -1,0 +1,15 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = fb_users.merge(fb_comments, left_on = 'id', right_on = 'user_id')
+df_joined = df[(df['joined_at'].dt.year >=2018) & (df['joined_at'].dt.year <=2020)] #user that join between 2018 and 2020
+df_joined[df_joined['joined_at'] < df_joined['created_at']]  #making sure joined date is before the comment date
+
+#filtering to make sure the comments should be in jan-2020
+df_comments = df_joined[(df_joined['created_at'].dt.month == 1) & (df_joined['created_at'].dt.year == 2020)]
+
+df_comments['no_of_comments'] = df_comments.groupby('id')['body'].transform('count')
+df_comments          #finding no of comments done by each user
+
+df_comments.groupby('no_of_comments')['id'].count().reset_index()  # finding distribution of comments by the count of users
