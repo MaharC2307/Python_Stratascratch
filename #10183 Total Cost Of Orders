@@ -1,0 +1,11 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = customers.merge(orders, left_on = 'id', right_on = 'cust_id')   #merge both dataframe
+
+ #add total cost column to df which shows total cost of each customers orders
+df['total_cost'] = df.groupby('cust_id')['total_order_cost'].transform('sum')
+
+#dropping duplicates and sorting
+df[['cust_id','first_name','total_cost']].drop_duplicates().sort_values(by = 'first_name')
