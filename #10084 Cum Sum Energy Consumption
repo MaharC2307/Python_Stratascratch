@@ -1,0 +1,29 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+#merge eu and na dataframe
+df = fb_eu_energy.merge(fb_na_energy,on = 'date', suffixes=('_eu','_na'), how = 'outer')
+
+#merge df and asia dataframe
+df = df.merge(fb_asia_energy, on ='date',suffixes = ('','_asia'),how = 'outer')
+
+#renaming column name
+df.rename(columns= {'consumption':'consumption_asia'}, inplace = True)
+
+# filling null values with 0 
+df.fillna(0,inplace = True)
+df
+
+# sum the energy consumption by date wise(row)
+df['total_energy_consumption'] = df[['consumption_eu','consumption_na','consumption_asia']].sum(axis = 1)
+df = df[['date','total_energy_consumption']]
+
+# finding total consumption of energy
+df['total_consumption'] = df['total_energy_consumption'].sum(axis = 0)
+
+# finding percentage consumption
+df['consumption_percentage'] = round((df['total_energy_consumption']/df['total_consumption'])*100).astype(str) + '%'
+
+df = df[['date','total_energy_consumption','consumption_percentage']]
+df
