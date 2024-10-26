@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+zillow_transactions['city_avg_price'] = zillow_transactions.groupby('city')['mkt_price'].transform('mean')
+
+zillow_transactions['natioanl_avg_price'] = zillow_transactions['mkt_price'].mean(axis = 0)
+df = zillow_transactions.drop_duplicates(subset = {'state','city'})
+df[df['city_avg_price'] > df['natioanl_avg_price']]['city']
