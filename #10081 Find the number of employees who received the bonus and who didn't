@@ -1,0 +1,15 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+df = employee.merge(bonus, left_on = 'id' , right_on = 'worker_ref_id',how = 'outer') #merge dataframe
+#1 if they had bonus, 0 if not
+df['has_bonus'] = df['bonus_amount'].apply(lambda x:1 if pd.notnull(x) else 0 ) 
+
+#dropping duplicates as one user can have mutliple bonuses
+df1 = df.drop_duplicates(subset = ['id','first_name','last_name'])
+df1
+
+#counting corresponding number of employees for employees with bonus or without bonus.
+df_final = df1.groupby('has_bonus')['id'].count().reset_index()
