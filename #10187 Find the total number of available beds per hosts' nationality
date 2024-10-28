@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = airbnb_apartments.merge(airbnb_hosts,on = 'host_id')  #merge both Dataframe
+df
+
+#using groupby to find total number of beds on basis of nationality
+df.groupby('nationality')['n_beds'].sum().reset_index().sort_values(by = 'n_beds' ,ascending = False)
