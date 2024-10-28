@@ -1,0 +1,11 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = excel_sql_inventory_data.merge(excel_sql_transaction_data,on = 'product_id') #merge both df
+
+# finding number of transactions for each product and then sort values by product_id
+df['number_of_transactions'] = df.groupby('product_name')['transaction_id'].transform('count')
+df_final = df.sort_values(by = 'product_id', ascending = True)
+
+df_final[['product_name','number_of_transactions']].drop_duplicates()
