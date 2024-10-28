@@ -1,0 +1,10 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+#finding the last time when each bike were used.
+df = dc_bikeshare_q1_2012.groupby('bike_number')['end_time'].max().reset_index()
+
+#sort values
+df.sort_values(by = 'end_time' , ascending = True)
