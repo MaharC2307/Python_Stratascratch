@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+#making sure datafram only consists of order placed in may 2020
+df = doordash_delivery[(doordash_delivery['customer_placed_order_datetime'] >= '2020-05-01' ) & (doordash_delivery['customer_placed_order_datetime'] <= '2020-05-31') ]
+
+#finding total revenu of each restaurant
+df_sum = df.groupby('restaurant_id')['order_total'].sum().reset_index()
+
+#dividing the df into 50 quartiles based on revenue so can easily find restaurant with bottom 2% revenue
+df_sum['quantile'] = pd.qcut(df_sum['order_total'], q=50, labels=False, duplicates='drop') +1
+df_sum[df_sum['quantile'] == 1][['restaurant_id','order_total']]
