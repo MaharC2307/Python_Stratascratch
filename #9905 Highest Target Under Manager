@@ -1,0 +1,10 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# find the max target achieved by exmployees with manager id 13
+max_target = salesforce_employees[salesforce_employees['manager_id'] == 13]['target'].max()
+max_target
+
+# find employee who achieved that condition
+salesforce_employees[(salesforce_employees['manager_id'] == 13) & (salesforce_employees['target'] == max_target)][['first_name', 'target']]
