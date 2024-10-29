@@ -1,0 +1,6 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+employee['target_rank'] = employee['target'].rank(method = 'dense', ascending = False)
+employee[employee['target_rank'] == 1][['first_name','bonus']]
