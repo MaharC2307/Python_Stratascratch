@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# filtering dataframe on basis of height and winter olympics
+df = olympics_athletes_events[(olympics_athletes_events['games'].str.contains('winter', case = False)) & 
+(olympics_athletes_events['height'].between(180,210))]
+
+df['event'].unique()
