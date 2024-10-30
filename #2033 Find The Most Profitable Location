@@ -1,0 +1,17 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+df = signups.merge(transactions, on = 'signup_id')   # merge both dataframe
+
+# finding signup duration 
+df['signup_duration'] = (df['signup_stop_date'] - df['signup_start_date']).dt.days
+df
+
+#getting avg signup_duration and avg transaction by location
+df_location_avg = df.groupby('location').agg({'signup_duration' : 'mean','amt' : 'mean'}).reset_index()
+df_location_avg
+
+# finding ratio
+df_location_avg['ratio'] = df_location_avg['amt']/df_location_avg['signup_duration']
+df_location_avg.sort_values(by = 'ratio', ascending = False)  # sorting values
