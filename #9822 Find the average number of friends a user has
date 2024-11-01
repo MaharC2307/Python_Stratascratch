@@ -1,0 +1,12 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+user_1 = google_friends_network.groupby('user_id').agg(Count = ('friend_id','count')).reset_index()
+
+user_2 = google_friends_network.groupby('friend_id').agg(Count = ('user_id','count')).reset_index()
+user_2 = user_2.rename(columns = {'friend_id' : 'user_id'})
+
+merged_df = pd.concat([user_1,user_2])
+
+merged_df['Count'].sum()/merged_df['user_id'].nunique()
