@@ -1,0 +1,17 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+#rename columns name so we can concat the dataframes
+facebook_friends_1 = facebook_friends.rename(columns = {'user1': 'user2','user2': 'user1'})
+concat_df = pd.concat([facebook_friends,facebook_friends_1],ignore_index = True).drop_duplicates()
+
+#finding no of friends a user has
+friend_count_df = concat_df.groupby('user1').count().reset_index()
+
+#finding popularity percentage
+friend_count_df['popularity percentage'] = ((friend_count_df['user2']/friend_count_df['user1'].count())*100)
+
+#sort values and getting required columns
+friend_count_df.sort_values(by = 'user1', ascending = True)[['user1', 'popularity percentage']]
