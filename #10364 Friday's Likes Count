@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+merged_df = user_posts.merge(likes, on = 'user_name' ) #meging df
+
+merged_df['day_name'] = merged_df['date_liked'].dt.day_name() # extracting day name from date
+
+friday_df = merged_df[merged_df['day_name'] == 'Friday']  # filtering if it is friday
+
+ #finding no of like by groiping the date
+friday_like_df = friday_df.groupby('date_liked')['post_id_x'].count().reset_index()
+friday_like_df
