@@ -1,0 +1,12 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+#using aggregation to find avg_score and no of team members which had given score
+df = project_data.groupby('project_id').agg(
+    avg_score = ('score','mean'),
+    count_team = ('team_member_id', 'nunique')
+    ).reset_index()
+    
+# filtering and extract the needed columns
+df[df['count_team'] > 1][['project_id' , 'avg_score']]
