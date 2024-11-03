@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+#merge_df
+merged_df = worker.merge(title, left_on = "worker_id" , right_on = "worker_ref_id")
+
+# finding maximum salary
+highest_salary = merged_df['salary'].max()
+
+# getting highest paid title
+merged_df[merged_df['salary'] == highest_salary]['worker_title']
