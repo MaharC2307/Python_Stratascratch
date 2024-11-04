@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+titanic['oldest_age'] = titanic.groupby('pclass')['age'].transform('max')
+
+tit_df = titanic[titanic['oldest_age'] == titanic['age']]
+
+tit_df[['name','age','pclass']].sort_values('pclass', ascending = True)
