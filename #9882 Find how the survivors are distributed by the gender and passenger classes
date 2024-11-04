@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+titanic = titanic[titanic['survived'] == 1] #filtering people who are survived
+
+#grouping values and unstack so we cna get different columns
+tit_df = titanic.groupby(['pclass','sex'])['passengerid'].count().unstack(level = 0)
+tit_df = tit_df.reset_index()
+
+#renaming column values
+tit_df.rename(columns = {1 : 'first_class', 2 : 'second_class', 3: 'third_class'}, inplace = True)
+tit_df
