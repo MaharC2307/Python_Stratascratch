@@ -1,0 +1,15 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# finding number of survivors and non-survivors by passenger class using unstack 
+tit_df = titanic.groupby(['survived','pclass'])['passengerid'].count().unstack()
+
+tit_df.reset_index(inplace = True) 
+
+# renaming column names
+tit_df.rename(columns = {1 : 'first_class', 2 : 'second_class', 3 : 'third_class'}, inplace = True)
+
+# tit_df['survived'].replace({0: 'non-survivors',1 : 'survivors'}, inplace = True)
+
+tit_df
