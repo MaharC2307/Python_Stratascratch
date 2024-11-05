@@ -1,0 +1,15 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+# merging dataframe
+merged_df = google_competition_participants.merge(google_competition_scores, on = 'member_id')
+
+# finding avg team score and then sorting values
+deepmind_teams = merged_df.groupby('team_id')['member_score'].mean().reset_index().sort_values(by = 'member_score',ascending = False)
+
+#renaming col name
+deepmind_teams.rename(columns = {'member_score' : 'team_score'},inplace = True)
+
+deepmind_teams
