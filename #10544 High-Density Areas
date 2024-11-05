@@ -1,0 +1,15 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+merged_df = transaction_records.merge(stores, on = 'store_id')
+
+merged_df['unique_cust'] = merged_df.groupby('area_name')['customer_id'].transform('nunique')
+
+merged_df['customer_density'] = merged_df['unique_cust']/merged_df['area_size']
+
+merged_df = merged_df[['area_name','customer_density']].drop_duplicates()
+
+merged_df['rank'] = merged_df['customer_density'].rank(method = 'dense', ascending = True)
+
+merged_df[merged_df['rank'] <= 3][['area_name' , 'customer_density']]
