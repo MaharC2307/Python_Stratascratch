@@ -1,0 +1,8 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+merge_df = customer_interactions.merge(user_content, on = 'customer_id')
+merge_df.drop_duplicates()
+merge_df.groupby('customer_id').agg({'interaction_id': 'nunique', 'content_id':'nunique'}).reset_index()
