@@ -1,0 +1,16 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+posts = posts[posts['likes'] != 0] #filtering posts df rows which doesn't have likes
+
+merge_df = posts.merge(channels, on = 'channel_id') # merging both df
+
+#ranking on basis of posts likes for each channel
+merge_df['rank'] = merge_df.groupby('channel_name')['likes'].rank(method ='min', ascending = False)
+
+#filtering to get 3 or less than 3 rank rows
+merge_df = merge_df[merge_df['rank'] <= 3]
+
+#taking columns we want and sorting columns
+merge_df[['channel_name','post_id','created_at','likes']].sort_values(by = ['channel_name','likes'], ascending = [True,False])
