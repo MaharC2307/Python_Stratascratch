@@ -1,0 +1,19 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+merged_df = sf_employee.merge(sf_bonus,left_on = 'id', right_on = 'worker_ref_id') #merge both dataframe
+
+merged_df = merged_df[merged_df['bonus'].isnull() == False] #making sure that every employee has bonus
+
+ #using groupby incase they get multiple bonus
+merged_df['bonus1'] = merged_df.groupby('id')['bonus'].transform('sum')
+
+# getting compensation by combining salary and bonus
+merged_df['compensation'] = merged_df['salary'] + merged_df['bonus1']
+
+# dropping duplicates
+merged_df.drop_duplicates(subset = ['id','first_name','last_name','age','sex','compensation'],inplace = True)
+
+#finding average compensation based on title aand gender
+merged_df.groupby(['employee_title','sex'])['compensation'].mean().reset_index()
