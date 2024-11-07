@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# merging both df using to_user and guest_id. as host is reviewing to_user has to be guest_id 
+merged_df = airbnb_reviews.merge(airbnb_guests,left_on = 'to_user', right_on = 'guest_id')
+
+# from_type has to be host and to_type has to be guest
+merged_df = merged_df[(merged_df['from_type'] == 'host') & (merged_df['to_type'] == 'guest')].drop_duplicates()
+
+# have to find average age of guest i.e to_user
+merged_df.groupby('to_user')['age'].mean().reset_index()
+
