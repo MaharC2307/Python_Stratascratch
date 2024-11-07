@@ -1,0 +1,12 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+# finding drivers who are still working for lyft
+lyft_current_drivers = lyft_drivers[lyft_drivers['end_date'].isnull() == True]
+
+# using rank method to find top5 paid drivers 
+lyft_current_drivers['rank'] =lyft_current_drivers['yearly_salary'].rank( ascending = False)
+
+lyft_current_drivers[lyft_current_drivers['rank'] <= 5]['start_date']
