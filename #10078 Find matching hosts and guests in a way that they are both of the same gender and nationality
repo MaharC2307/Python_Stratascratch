@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+#merging both df to get matching guests and hosts pair in way that nationality and gender are same
+match_nation = airbnb_hosts.merge(airbnb_guests, left_on=['nationality','gender'], right_on = ['nationality','gender'])
+
+# dropping duplicates
+updated_df = match_nation.drop_duplicates()
+
+updated_df[['host_id','guest_id']]
+
