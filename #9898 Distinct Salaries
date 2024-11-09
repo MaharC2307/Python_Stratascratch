@@ -1,0 +1,11 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+# using groupby and rank to rank  top 3 salaries of each department. Dense assigns ranks without skipping numbers in case of ties.
+twitter_employee['rank'] = twitter_employee.groupby('department')['salary'].rank(method = 'dense' , ascending = False)
+
+# getting all rows with <= 3 value and then dropping duplicates and sorting values and getting columns we want
+twitter_employee[twitter_employee['rank'] <= 3][['department','salary']].drop_duplicates().sort_values(by = ['department','salary'], ascending = [True, False ])
+# 
