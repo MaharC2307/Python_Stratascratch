@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+# using groupby and rank to find ranking on basis of salary by partitioning department wise
+employee['rank'] = employee.groupby('department')['salary'].rank(method = 'dense',ascending = False)
+
+employee[employee['rank'] < 2][['department','first_name','salary']]
