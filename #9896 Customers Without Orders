@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+merged_df = customers.merge(orders, left_on = 'id' ,  right_on = 'cust_id', how = 'left')
+
+cust_without_orders = merged_df[merged_df['cust_id'].isnull()]
+
+cust_without_orders['first_name']
