@@ -1,0 +1,12 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+
+# using agg instead of using direct count as i have to rename column name
+emp_count = employee.groupby('department').agg(count= ('id','count')).reset_index()
+
+
+# querying to retrieve data with more than 5 emp
+emp_count[emp_count['count'] >= 5]['department']
