@@ -1,0 +1,12 @@
+# merging datframes to left as we want all cust_id even thought they didnt order any thing
+merged_df = customers.merge(orders, left_on = 'id', right_on = 'cust_id',how = 'left')
+
+# grouping by city to get total orders,customers and cost
+df = merged_df.groupby('city').agg(
+                total_orders = ('id_y','count'),
+                total_customers = ('id_x', 'count'),
+                total_cost = ('total_order_cost', 'sum')
+    ).reset_index()
+    
+#only taking data which has atleast 5 orders    
+df[df['total_orders'] >= 5]
