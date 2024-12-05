@@ -1,0 +1,5 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+hotel_reviews[hotel_reviews['negative_review'] != 'No Negative'].groupby('hotel_name')['negative_review'].count().reset_index().sort_values(by = 'negative_review', ascending = False).head(2)
