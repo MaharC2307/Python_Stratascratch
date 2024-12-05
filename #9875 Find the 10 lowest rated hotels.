@@ -1,0 +1,5 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+hotel_reviews.groupby('hotel_name')['average_score'].mean().reset_index().sort_values(by = 'average_score', ascending = True).head(10)
