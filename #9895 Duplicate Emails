@@ -1,0 +1,5 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+employee.groupby('email')['id'].count().reset_index(name = 'count').query("count > 1")['email']
