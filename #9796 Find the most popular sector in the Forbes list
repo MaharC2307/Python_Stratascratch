@@ -1,0 +1,9 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+company_count = forbes_global_2010_2014.groupby('sector')['company'].nunique().reset_index()
+
+company_count.rename(columns = {'company':'distinct_company_count'}, inplace = True)
+
+company_count.sort_values(by = 'distinct_company_count', ascending = False)
